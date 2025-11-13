@@ -1,0 +1,22 @@
+{
+  "name": "sistema-de-estoque",
+  "version": "1.0.0",
+  "main": "script.js",
+  "scripts": {
+    "start": "nodemon script.js"
+  },
+  "keywords": [
+    "sistema",
+    "de",
+    "estoque"
+  ],
+  "author": "Maria Fernanda Tomazelli Bonini",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0",
+    "express-session": "^1.18.2",
+    "mysql2": "^3.15.3",
+    "nodemon": "^3.1.11"
+  }
+}

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+</head>
+<body>
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body{
+            background: linear-gradient(135deg,rgb(27, 27, 27), rgb(10, 102, 145));
+            background-repeat: no-repeat;
+            background-size: cover;
+            min-height: 100vh;
+            font-family: "Quicksand", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 600;
+            font-style: normal;
+
+        }
+
+        h1{
+            color: whitesmoke;
+        }
+
+        .titulo{
+            padding-top: 70px;
+            text-align: center;
+            font-size: 50px;
+        }
+
+        h2,p{
+            color: whitesmoke;
+        }
+
+        .container{
+            margin-top: 280px;
+            background: rgb(10, 102, 145);
+            padding: 50px 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            width: 350px;
+            transition: all 0.3s;
+        }
+
+        .container:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .servicos{
+            display: flex;
+            justify-content: center;
+            align-items: center; 
+            height: 50vh;
+            margin-left: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: row;
+                gap: 20px; 
+            }
+        }
+
+    </style>  
+
+    <h1 class="titulo">Serviços</h1>
+    <div class="servicos">
+        <div class="container">
+            <h2>Cadastro de Produtos <i class="bi bi-plus-circle-dotted"></i></h2>
+            <p>Cadastre novos produtos ao nosso estoque!</p>
+        </div>  
+        <div class="container">
+            <h2>Visualização dos Produtos <i class="bi bi-table"></i></h2>
+            <p>Consulte os detalhes de todos os itens</p>
+        </div>    
+        <div class="container"> 
+            <h2>Entrada e Saída de Estoque <i class="bi bi-plus-slash-minus"></i></h2>
+            <p>Adicione ou retire produtos de estoque</p>
+        </div> 
+    </div>   
+</body>
+</html>
