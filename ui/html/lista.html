@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos</title>]
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body{
+            background: linear-gradient(135deg,rgb(27, 27, 27), rgb(10, 102, 145));
+            background-repeat: no-repeat;
+            background-size: cover;
+            min-height: 100vh;
+            font-family: "Quicksand", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 600;
+            font-style: normal;
+        }
+
+        h1{
+            color: whitesmoke;
+            text-align: center;
+        }
+
+        .titulo{
+            padding-top: 70px;
+            text-align: center;
+            font-size: 50px;
+        }
+
+        h2,p{
+            color: whitesmoke;
+        }
+
+        table { 
+            width: 60%; 
+            border-collapse: collapse; 
+            margin-top: 200px; 
+            margin-left: auto;
+            margin-right: auto;
+        }
+        th, td { 
+            border: 1px solid rgb(10, 102, 145); 
+            padding: 8px; 
+            text-align: left; 
+        }
+        th { 
+            background-color: rgb(10, 102, 145); 
+            color: white;
+        }
+        td{
+            color: white;
+        }
+    </style>
+
+    <h1 class="titulo">Estoque de Produtos</h1>
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Marca</th>
+                <th>Volume</th>
+                <th>Tipo de Embalagem</th>
+                <th>Aplicação</th>
+                <th>Estoque</th>
+                <th>Estoque Minimo</th>
+            </tr>
+        </thead>
+        <tbody id="tabela">
+        </tbody>
+    </table>
+
+    <script>
+        // Função para buscar e exibir os dados
+        async function carregarProdutos() {
+            const tabelaCorpo = document.getElementById('tabela');
+            tabelaCorpo.innerHTML = '<tr><td colspan="4">Carregando produtos...</td></tr>'; // Mensagem de carregamento
+
+            try {
+                // 1. CHAMA a rota que retorna os dados JSON
+                const response = await fetch('/api/produtos'); 
+                
+                if (!response.ok) {
+                    throw new Error(`Erro HTTP: ${response.status}`);
+                }
+
+                // 2. RECEBE o JSON
+                const data = await response.json(); 
+                const produtos = data.produto; // 'produto' é a chave que você definiu no backend
+
+                // 3. LIMPA o corpo da tabela
+                tabelaCorpo.innerHTML = ''; 
+
+                // 4. PERCORRE a lista de produtos e CRIA as linhas
+                produtos.forEach(produto => {
+                    const row = tabelaCorpo.insertRow(); // Cria uma nova linha (<tr>)
+                    
+                    // Cria as células (<td>) e insere os valores
+                    row.insertCell().textContent = produto.id_produto;
+                    row.insertCell().textContent = produto.nome;
+                    row.insertCell().textContent = produto.marca;
+                    row.insertCell().textContent = produto.volume;
+                    row.insertCell().textContent = produto.tipo_embalagem;
+                    row.insertCell().textContent = produto.aplicacao;
+                    row.insertCell().textContent = produto.estoque;
+                    row.insertCell().textContent = produto.estoque_minimo;
+                });
+
+            } catch (error) {
+                console.error('Erro ao buscar os produtos:', error);
+                tabelaCorpo.innerHTML = `<tr><td colspan="4" style="color:red;">Erro ao carregar dados: ${error.message}</td></tr>`;
+            }
+        }
+
+        // 5. CHAMA a função quando a página carregar
+        carregarProdutos();
+    </script>
+
+</body>
+</html>

@@ -1,6 +1,7 @@
 const express = require('express')
 const mysql = require('mysql2/promise')
 var session = require('express-session')
+const path = require('path')
 
 const conn = mysql.createPool({
     host:"localhost",
@@ -71,6 +72,7 @@ app.post("/produtos", async (req,res) =>{
     })
 
     try { 
+        res.sendFile(__dirname + "/ui/html/cadastro.html")
         const sql = "INSERT INTO cadastro_produtos (nome,marca,volume,tipo_embalagem,aplicacao,estoque,estoque_minimo) VALUES (?,?,?,?,?,?,?);"
          
         await conn.query(sql, [nome,marca,volume,tipo_embalagem,aplicacao,estoque,estoque_minimo])
@@ -84,33 +86,39 @@ app.post("/produtos", async (req,res) =>{
     }
 })
 
+
 //LISTA OS PRODUTOS
-app.get("/produtos", async (req,res) =>{
-    
-    try{
-        const mysql2 = "SELECT id_produto, nome, marca, estoque FROM cadastro_produtos;"
+app.get("/lista", (req,res) =>{
+    res.sendFile(__dirname + "/ui/html/lista.html")
+})
+
+app.get("/api/produtos", async(req,res) =>{
+   try{
+        const mysql2 = "SELECT id_produto,nome,marca,volume,tipo_embalagem,aplicacao,estoque,estoque_minimo FROM cadastro_produtos;"
         
         const [produtoLista] = await conn.query(mysql2)
         
         res.json({
-            produto: produtoLista 
-        })
+            produto: produtoLista
+        }) 
+        
     } catch (error){
         console.log(error)
         res.status(500).json({erro: "Erro no servidor"})
-    }  
+    }   
 })
 
 //ENTRADA NO ESTOQUE
 app.put("/estoque/entrada", (req,res) =>{
+    res.sendFile(__dirname + "/ui/html/entrada.html")
 })
 
 //SAIDA NO ESTOQUE
 app.put("/estoque/saida", (req,res) =>{
-
+    res.sendFile(__dirname + "/ui/html/saida.html")
 })
 
 //ALERTA DE ESTOQUE
 app.get("/alerta", (req,res) =>{
-
+    res.send(__dirname + "/ui/html/alerta.html")
 })
